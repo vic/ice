@@ -1,0 +1,81 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <title>Controls for IBE Reskinning</title> 
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'> 
+    <meta charset='utf-8'> 
+    <meta keywords='IBE Reskinning prototypes'> 
+    <meta content='prototype of web controls for IBE' name='description'> 
+    <meta content='Victor Hugo Borja' name='author'> 
+    <meta content='vic.borja@gmail.com' name='author-email'> 
+    <link href='flatForm.less' rel='stylesheet/less' type='text/css'> 
+    <script src='../js/less-1.0.33.min.js' type='text/javascript'></script> 
+    <script src='../js/jquery-1.4.2.min.js' type='text/javascript'></script> 
+    <script src='../js/underscore-min.js' type='text/javascript'></script> 
+    <script src='../js/jquery-ui-1.8.4.custom.min.js' type='text/javascript'></script> 
+    <script src='http://jqueryui.com/themeroller/themeswitchertool/' type='text/javascript'></script> 
+    <script src='flatForm.js' type='text/javascript'></script> 
+  </head> 
+  <body>
+    <h2>IBE Reskinning - WEB Controls - Flat form</h2>
+
+    <div>
+      
+      This example shows styling form elements.
+      
+      <div class="form-width">
+
+        <fieldset class="flat ui-corner-all">
+          <legend>Guest Login</legend>
+
+          <div>
+            <label for="type">Select One</label>
+            <input name="type" type="radio" checked="checked"/>New Guest
+            <input name="type" type="radio" />Registered User
+          </div>
+        </fieldset>
+
+        <br />
+
+        <fieldset class="flat ui-corner-all">
+          <legend>Primary Guest Information</legend>
+
+          <div>
+            <label for="first" class="inline10em">First Name</label>
+            <input name="first" type="text" class="ui-corner-all" />
+          </div>
+
+          <div>
+            <label for="last" class="inline10em">Email</label> 
+            <input name="last" type="text" class="ui-corner-all" />
+          </div>
+
+          <div>
+            <label for="country" class="inline10em">Country</label> 
+            <select>
+              <option>Mexico</option>
+              <option>USA</option>
+              <option>Canada</option>
+            </select>
+          </div>
+
+          <div>
+            <span class="inline10em">&nbsp;</span>
+            <input type="checkbox"/> Add to my Guest Profile
+          </div>
+        </fieldset>
+
+      </div>
+      
+    
+      <h3>How this works:</h3>
+      <div>
+        Css styling.
+        <code>floatForm.less</code>
+      </div>
+      
+    </div>
+
+  </body>
+</html>
+
