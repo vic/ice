@@ -88,5 +88,42 @@
     </div>
     <div>After</div>
 
+
+    <div>
+      <h3>How this works</h3>
+      <div>
+        The container is a simple div and each box is just another div
+        inside the container. 
+
+        <p>
+          The secret for creating the grid is
+          in the <code>gridList.less</code> file.
+        </p>
+
+        There you will find two less variables: <br />
+        <code>@grid_box_width</code><br />
+        <code>@grid_box_height</code><br />
+
+        <br />
+        And most importanlty three grid layouts: <br />
+        <code>@grid.cols2</code><br />
+        <code>@grid.cols3</code><br />
+        <code>@grid.cols4</code><br />
+
+        These styles use less arithmetic to specify the width of each
+        grid layout.
+        <br />
+
+        The <code>gridList.js</code> file is responsible for binding
+        element events (when you select one of the checkboxes
+        above)<br/>
+
+
+        The only thing it does is set the container class to either
+        list or grid (and cols2, cols3, cols4 )
+
+      </div>
+    </div>
+
   </body>
 </html>
