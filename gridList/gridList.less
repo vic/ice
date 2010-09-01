@@ -1,0 +1,49 @@
+/* -*- css -*- 
+ * a LESS file is just a CSS file with variables, basic numeric arithmetic.
+ * 
+ * read more at: lesscss.org
+ */
+
+.grid:after {
+   clear: both;
+   content: ' ';
+   display: block;
+   font-size: 0;
+   line-height: 0;
+   visibility: hidden;
+   width: 0;
+   height: 0;
+}
+.grid > div{
+   display:inline;
+   float: left;
+   position: relative;
+}
+
+
+/* The grid variables */
+@grid_box_width: 100px;
+@grid_box_height: 100px;
+
+/* example grid of two columns */
+.grid.cols2 { width: 2 * @grid_box_width; }
+
+/* example grid of two columns */
+.grid.cols3 { width: 3 * @grid_box_width; }
+
+/* example grid of two columns */
+.grid.cols4 { width: 4 * @grid_box_width; }
+
+/* Sets the width/height of each grid box */
+.grid > div {
+   width: @grid_box_width;
+   height: @grid_box_height;
+}
+/* hide list-mode elements when in grid */
+.grid .list-mode {
+   display: none;
+}
+/* hide grid-mode elements when in list */
+.list .grid-mode {
+   display: none;
+}

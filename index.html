@@ -1,0 +1,154 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <title>Controls for IBE Reskinning</title> 
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'> 
+    <meta charset='utf-8'> 
+    <meta keywords='IBE Reskinning prototypes'> 
+    <meta content='prototype of web controls for IBE' name='description'> 
+    <meta content='Victor Hugo Borja' name='author'> 
+    <meta content='vic.borja@gmail.com' name='author-email'> 
+    <link href='index.css' rel='stylesheet' type='text/css'> 
+    <script src='js/json2.js' type='text/javascript'></script> 
+    <script src='js/underscore-min.js' type='text/javascript'></script> 
+    <script src='js/less-1.0.33.min.js' type='text/javascript'></script> 
+    <script src='js/jquery-1.4.2.min.js' type='text/javascript'></script> 
+    <script src='js/jquery-ui-1.8.4.custom.min.js' type='text/javascript'></script> 
+    <script src='http://jqueryui.com/themeroller/themeswitchertool/' type='text/javascript'></script> 
+    <script src='js/jquery.timeago.js' type='text/javascript'></script> 
+    <script src='js/jquery.purr.js' type='text/javascript'></script> 
+    <script src='js/date.js' type='text/javascript'></script> 
+    <script src='index.js' type='text/javascript'></script> 
+  </head>
+  <body>
+    <div class="color-theme-select">
+      <div class="theme-roller">
+    </div>
+
+    <h2>IBE Reskinning - WEB Controls</h2>
+    <div class="protocol-warning ui-state-error ui-corner-all">
+      <div class="ui-widget-header ui-corner-all">
+        You not viewing this file using the http:// protocol.
+      </div>
+      <p>
+        Some examples wont work as they expect to make ajax, other http
+        network stuff.
+      </p>
+
+      <div>
+        A <code>serve.py</code> server is included. Just run:
+
+        <pre>
+          $ <code>python serve.py</code>
+        </pre>
+        
+        And start your browser in 
+        <a href="http://localhost:8000">http://localhost:8000</a>
+      </div>
+    </div>
+
+    <p>
+      This page will showcase several web controls implemented with pure
+      css and javascript.
+
+      The intention is to document how controls should be implemented, coding
+      conventions and the like. 
+
+      If you have the source for this page, you can take a look
+      at <code>index.html</code> <code>index.js</code> and <code>index.css</code>
+
+      I tried to make each example as easy as possible, trying to
+      lower the learning curve for you. Make sure you understand the implementation
+      of the controls that will be implemented on your page. If you
+      have questions, please send me a message.
+    </p>
+
+    <div class="content">
+      <h3 class="ui-widget-header ui-corner-all">Conventions</h3>
+
+      <div>
+        <h4>No Javascript on HTML/JSP files.</h4>
+        <p>
+          <em>do not place any javascript code on html elements</em>, not even using
+          script tags, nor as onclick attribute for elements.
+
+          Doing this only makes things more difficult when developer
+          instance != you
+        </p>
+        <p>
+          You are expected to create .js files for every javascript
+          you need. 
+
+          Event handlers like onclick, onchange, etc, must be bound to
+          the corresponding elements by using jQuery's event
+          binding 
+        </p>
+      </div>
+
+      <div>
+        <h4>No styling information on HTML/JSP files</h4>
+        <p>
+          HTML/JSP must be used <em>only for content and
+          structure</em>
+          information. Styling must be specified on separate .less or
+          .css files.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="content">
+      <h3 class="ui-widget-header ui-corner-all">Tools</h3>
+
+      <div>
+        <h4>jQuery</h4>
+        <p>
+          We will be using jQuery, it's a really simple, jet powerful
+          javascript framework for creating, modifing dom elements,
+          and attaching, handling events. 
+          
+          <a href="http://jquery.org">Homepage</a>
+        </p>
+      </div>
+
+      <div>
+        <h4>jQuery UI</h4>
+        <p>
+          We will be using jQuery UI, for common reusable UI widgets
+          like accordions, date pickers, etc.
+          
+          <a href="http://jqueryui.org">Homepage</a>
+        </p>
+      </div>
+
+      <div>
+        <h4>Underscore.js</h4>
+        <p>
+          Underscore provides several functional extension in
+          javascript, like <code>_.each</code>, <code>_.deffer</code>
+          
+          <a href="http://documentcloud.github.com/underscore/">Homepage</a>
+        </p>
+      </div>
+
+
+    </div>
+
+
+    <div class="content">
+      <h3 class="ui-widget-header ui-corner-all">Examples</h3>
+
+      <div>
+        <h5><a href="gridList/index.html">Simple grid-list toggle</a></h5>
+        <div>
+          In this example you will learn how to create simple
+          container that can be changed from grid to list mode.
+
+          This example shows usage of LESS files, jQuery and underscore
+          libraries.
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</body>
