@@ -95,6 +95,34 @@
         </p>
       </div>
 
+      <div>
+        <h4>All javascript code must be inside a function scope</h4>
+        <p>
+          <pre>
+            <code>
+              (function($) {
+
+                // prefer declaring functions with the var keyword 
+                // like this:
+
+                var bindEvents = function() {
+                  // bind onclick, hover, etc, dom events
+                }
+
+                var initialize = function() {
+                  // Code here.
+                  bindEvents()
+                }
+
+
+                $(document).ready(initialize)
+
+              })(jQuery);
+            </code>
+          </pre>
+        </p>
+      </div>
+
     </div>
 
     <div class="content">
