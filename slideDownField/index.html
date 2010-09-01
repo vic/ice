@@ -19,35 +19,58 @@
   <body>
     <h2>IBE Reskinning - WEB Controls - Slide down field</h2>
 
-    <div class="slideDownField">
+    <div>
+
+    This example shows a label that when clicked slides down another div.
+    This will be used for some form elements.
+
+    <div class="slideDownField ui-widget">
       <label>
 
         Filer
         <div class="ui-icon ui-icon-triangle-1-e"></div>
 
       </label>
-      <div class="hidden">
-        <div class="link">
-          <a>All</a>
-        </div>
+      <div class="content hidden">
 
-        <div class="link">
-          <a>Promotions</a>
-        </div>
+        <div class="ui-widget-header ui-corner-all">
 
-        <div class="link">
-          <a>Pre-pay</a>
-        </div>
+          <div class="link ui-state-default ui-corner-all ui-button">
+            <a>All</a>
+          </div>
+          
+          <div class="link ui-state-default ui-corner-all ui-button">
+            <a>Promotions</a>
+          </div>
+          
+          <div class="link ui-state-default ui-corner-all ui-button">
+            <a>Pre-pay</a>
+          </div>
+          
+          <div class="link ui-state-default ui-corner-all ui-button">
+            <a>Deffered-pay</a>
+          </div>
+          
+          <div class="link ui-state-default ui-corner-all ui-button">
+            <a>Best Available</a>
+          </div>
 
-        <div class="link">
-          <a>Deffered-pay</a>
-        </div>
-
-
-        <div class="link">
-          <a>Best Available</a>
         </div>
       </div>
+    </div>
+
+    <h3>How this works:</h3>
+    <div>
+      The <code>slideDownField.js</code> file binds
+      the <code>click</code> event to the above label. when clicked, 
+      if the content div is hidden, it is shown. otherwise it will be
+      hidden.<br />
+
+      The javascript changes the class of the triangle inside the
+      label.
+
+    </div>
+
     </div>
 
   </body>
