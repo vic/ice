@@ -21,6 +21,7 @@
     <script src='index.js' type='text/javascript'></script> 
   </head>
   <body>
+
     <div class="color-theme-select">
       <div class="theme-roller">
     </div>
@@ -52,7 +53,7 @@
       css and javascript.
 
       The intention is to document how controls should be implemented, coding
-      conventions and the like. 
+      conventions, and examples. 
 
       If you have the source for this page, you can take a look
       at <code>index.html</code> <code>index.js</code> and <code>index.css</code>
@@ -76,12 +77,11 @@
           instance != you
         </p>
         <p>
-          You are expected to create .js files for every javascript
-          you need. 
+          You are expected to create .js files for every javascript you need. 
 
           Event handlers like onclick, onchange, etc, must be bound to
           the corresponding elements by using jQuery's event
-          binding 
+          binding
         </p>
       </div>
 
@@ -92,6 +92,14 @@
           structure</em>
           information. Styling must be specified on separate .less or
           .css files.
+        </p>
+      </div>
+
+      <div>
+        <h4>Dont use HTML Tables</h4>
+        <p>
+          Even though it is not forbidden, you're expected not to use
+          html table elements. Use divs and css instead.
         </p>
       </div>
 
