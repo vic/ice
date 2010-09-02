@@ -68,6 +68,100 @@
       <h3 class="ui-widget-header ui-corner-all">Conventions</h3>
 
       <div>
+        <h4>The future is now!</h4>
+        <p>
+          We will be using current industry standards for all
+          documents we create. HTML5 for html/jsp files and CommonJS
+          conformant modules for our javascript needs.
+        </p>
+
+        <h5>HTML5 conformance</h5>
+        <p>
+          Always use HTML5 document declaration.
+        </p>
+        <pre>
+          <code class="html">
+            &lt;!DOCTYPE html&gt; 
+            &lt;html&gt; 
+              ...
+            &lt;/html&gt; 
+          </code>
+        </pre>
+        <p>
+          If you need to create custom html element attributes, make
+          sure you prefix them with <code>data-</code> so that the document
+          validates as HTML5.
+        </p>
+        <pre>
+          <code class="html">
+            &lt;div data-type="available" /&gt; 
+            &lt;div data-type="best-rate" /&gt; 
+            &lt;div data-type="on-hollidays" /&gt; 
+          </code>
+        </pre>
+
+        <h5>CommonJS standards</h5>
+        <p>
+          <a href="http://commonjs.org">Common JS</a> is a community effort to create
+          standards for javascript applications, both server and client side.
+        </p>
+        <p>
+          We will be
+          using <a href="http://requirejs.org">requirejs</a> to load
+          all the javascript, css and other resources we need.
+        </p>
+        <p>
+          The advantage of using requirejs is that resources are
+          loaded async, which means faster loading, more reusable
+          javascript modules, and a clean, un-polluted javascript
+          global scope.
+        </p>
+      </div>
+
+      <div>
+        <h4>Javascript Layout and Directory Structure</h4>
+        <p>
+          All javascript files <em>must</em> be stored under
+          the <code>js/</code> directory of the server's document
+          root.<br />
+        </p>
+        <p>
+          The url
+          for <a href="/js/console.js"><code>console.js</code></a> will be
+          <code>http://localhost/js/console.js</code>
+        </p>
+        <p>
+          You are expected to create subdirectories to acommodate your
+          needs by creating reusable javascript modules with
+          requirejs.
+        </p>
+
+        <p>
+          For example, say I'm implementing the javascript for the
+          IBE Login page.. the javascript for it must be available at: 
+          <br />
+          <code>js/ibe/login.js</code>
+        </p>
+      </div>
+
+      <div>
+        <h4>Create a javascript modules per .js file you create</h4>
+        <p>
+          Following the convention from the previous point, you are
+          expected to make every .js file a <code>requirejs</code>
+          conformant module. <br />
+
+          The advantang of doing so, is that module dependencies will
+          be automatically resolved for us by requirejs, modules will
+          be only loaded once and only when needed. The client will
+          get faster load times and less network usage.
+        </p>
+        <p>
+          
+        </p>
+      </div>
+
+      <div>
         <h4>No Javascript on HTML/JSP files.</h4>
         <p>
           <em>do not place any javascript code on html elements</em>, not even using
@@ -104,28 +198,160 @@
       </div>
 
       <div>
-        <h4>All javascript code must be inside a function scope</h4>
+        <h4>Javascript coding style</h4>
+
+        <h5>No free variables</h5>
         <p>
+          <em>Always</em> use the <code>var</code>
+          keyword to declare your variables. Not doing so would lead
+          to scope naming conflicts. 
+        </p>
+
+        <h5>Always use === operator for comparisions</h5>
+        <p>
+          The <code>===</code> operator behaves more like
+          java's <code>equals</code>, the javascript <code>==</code>
+          operator automatically coerces types, so for example, in
+          javascript: 
+
           <pre>
-            <code>
-              (function($) {
+            <code class="javascript">
+              12345 == '12345';   // is true
+              12345 === '12345';  // is false
+            </code>
+          </pre>
+        </p>
 
-                // prefer declaring functions with the var keyword 
-                // like this:
+        <h5>Declare functions as variables</h5>
+        <p>
+          Declare javascript functions by assigning anonymous
+          functions to variables using the <code>var</code> keyword.
+          <pre>
+            <code class="javascript">
+              // Not recommended.
+              function doSomething() { ... }
 
-                var bindEvents = function() {
-                  // bind onclick, hover, etc, dom events
+              // Do this!
+              var doSomething = function() { ... }
+            </code>
+          </pre>
+        </p>
+
+        <h5>Always use Javascript semicolons</h5>
+        <p>
+          Javascript semicolons <code>;</code> are used as statement
+          terminator, unlike languages like java, in javascript
+          semicolons can be infered by the engine when it finds a
+          line feed. However you are expected to explicitly add
+          semicolons so that javascript minimizers can remove line
+          feeds safely.
+          
+          <pre>
+            <code class="javascript">
+              a = 1 + 2;  // Always do this.
+              a = 1 + 2   // Dont do this, wont work on some compressors
+            </code>
+          </pre>
+        </p>
+
+        <h5>Dont polute global scope</h5>
+        <p>
+          You <em>must</em> place all global javascript code
+          inside an anonymous immediatly-activated function.
+          <pre>
+            <code class="javascript">
+              (function() {
+                // your code here.
+                // fine, but not recommended as we prefer commonjs
+                // modules. see the following example...
+              })();
+            </code>
+
+            <code class="javascript">
+              // When using requirejs, you place all your code inside the
+              // function given to require.
+              // This example requires the IBE Login module from 
+              // the next section, to login when loaded.
+              require.def('my/module', ['ibe/login'], function(usrAuth){
+                // All your code here.
+                usrAuth.login('root', 'super-password')
+              });
+            </code>
+          </pre>
+        </p>
+
+        <h5>Use javascript logging</h5>
+        <p>
+          Some times you will need to log something to the javascript
+          console.<br />
+
+          If you are using firefox install firebug, other browsers
+          like chrome, opera and ie8 come with their own debuggers. <br />
+
+          I recommend using chrome or firefox for javascript
+          development. <br />
+          
+          Also, we have a <code>console.js</code> module you must use
+          for all your logging needs instead of accessing
+          window.console yourself. <br/>
+
+          Using console.js allows us to enable javascript logging on
+          development environment and easily disable it for
+          production. <br />
+
+          Also, thanks to IE8 not following the standards, you might
+          want to
+          install <a href="http://getfirebug.com/firebuglite">frebuglite</a>
+          on it.
+
+          <pre>
+            <code class="javascript">
+              window.console.debug('Hi') // DONT EVER access the console directly
+              console.debug('Hi')        // NOT
+            </code>
+            <a name="login-module-example"/>
+            <code class="javascript">
+              /* 
+                 Use the console.js module instead 
+
+                 This example illustrates how to define a module in
+                 <code>ibe/login.js</code>
+                 with one dependency: the console.
+              */
+              require.def('ibe/login', ['console'], function(console) {
+                console.debug('IBE LOGIN module loading');
+                console.debug('run when all dependencies are loaded');
+
+              
+                // this var will be private inside the module.
+                var currentUser;
+                var md5Pwd;
+              
+                var doLogin = function(usr, pwd) {
+                   console.debug('Logged in', usr, pwd);
+                   currentUser = usr;
+
+                   // suppose we have a ibe/encode.js module
+                   // that exports an md5 function..
+                   // and want to load it just when needed.
+
+                   require(['ibe/encode], function(encode) {
+                     encriptedPwd = encode.md5(pwd);
+                   });
+                };
+
+                var doLogout = function() {
+                   console.debug('Logged out', currentUser);
+                   currentUser = null;
                 }
 
-                var initialize = function() {
-                  // Code here.
-                  bindEvents()
-                }
+                console.debug('returning module with public functions')
 
-
-                $(document).ready(initialize)
-
-              })(jQuery);
+                return {
+                   login: doLogin,
+                   logout: doLogout
+                };
+              });
             </code>
           </pre>
         </p>
