@@ -51,6 +51,7 @@ new(function(undefined) {
     obj.log = noop;
     obj.debug = noop;
     obj.info = noop;
+    obj.warn = noop;    
     obj.error = noop;    
   }
 
@@ -58,6 +59,7 @@ new(function(undefined) {
     obj.log = consoleFunction('log');
     obj.debug = consoleFunction('debug');
     obj.info = consoleFunction('info');
+    obj.warn = consoleFunction('warn');
     obj.error = consoleFunction('error');
   };
 
