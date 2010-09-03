@@ -39,14 +39,6 @@ new(function($, undefined){
     $('.protocol-warning').show()
   }
 
-  // when the document has finally loaded 
-  // use theme-roller to configure the color theme
-  $(document).ready(function(){
-    $('.color-theme-select .theme-roller').themeswitcher({
-      loadTheme: 'Redmond'
-    })
-  })
-
   // This example loads the console module if not already loaded.
   $.use('console', function(console){
     // when the module is loaded, this function body is executed
@@ -55,6 +47,18 @@ new(function($, undefined){
     console.warn('This is a warning')
     console.error('An inteded error, please ignore')
     console.debug('This is the console object', console)
+  })
+
+
+  // even non commonjs modules
+  $.use("http://jqueryui.com/themeroller/themeswitchertool/", function(){
+    // when the document has finally loaded 
+    // use theme-roller to configure the color theme
+    $(document).ready(function(){
+      $('.color-theme-select .theme-roller').themeswitcher({
+        loadTheme: 'Redmond'
+      })
+    })
   })
 
 
