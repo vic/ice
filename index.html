@@ -8,17 +8,12 @@
     <meta content='prototype of web controls for IBE' name='description'> 
     <meta content='Victor Hugo Borja' name='author'> 
     <meta content='vic.borja@gmail.com' name='author-email'> 
-    <link href='index.css' rel='stylesheet' type='text/css'> 
-    <script src='js/json2.js' type='text/javascript'></script> 
-    <script src='js/underscore-min.js' type='text/javascript'></script> 
-    <script src='js/less-1.0.33.min.js' type='text/javascript'></script> 
-    <script src='js/jquery-1.4.2.min.js' type='text/javascript'></script> 
-    <script src='js/jquery-ui-1.8.4.custom.min.js' type='text/javascript'></script> 
-    <script src='http://jqueryui.com/themeroller/themeswitchertool/' type='text/javascript'></script> 
-    <script src='js/jquery.timeago.js' type='text/javascript'></script> 
-    <script src='js/jquery.purr.js' type='text/javascript'></script> 
-    <script src='js/date.js' type='text/javascript'></script> 
-    <script src='index.js' type='text/javascript'></script> 
+
+    <script src="js/requireplugins-jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="js/jquery.use.js" type="text/javascript"></script>
+
+    <script type="text/javascript">jQuery.use('ice/index')</script>
+
   </head>
   <body>
 
@@ -39,8 +34,8 @@
       <div>
         A <code>serve.py</code> server is included. Just run:
 
-        <pre>
-          $ <code>python serve.py</code>
+        <pre class="prettyprint lang-sh">
+          $ python serve.py
         </pre>
         
         And start your browser in 
@@ -79,25 +74,21 @@
         <p>
           Always use HTML5 document declaration.
         </p>
-        <pre>
-          <code class="html">
-            &lt;!DOCTYPE html&gt; 
-            &lt;html&gt; 
-              ...
-            &lt;/html&gt; 
-          </code>
+        <pre class="prettyprint">
+          &lt;!DOCTYPE html&gt; 
+          &lt;html&gt; 
+          ...
+          &lt;/html&gt; 
         </pre>
         <p>
           If you need to create custom html element attributes, make
           sure you prefix them with <code>data-</code> so that the document
           validates as HTML5.
         </p>
-        <pre>
-          <code class="html">
-            &lt;div data-type="available" /&gt; 
-            &lt;div data-type="best-rate" /&gt; 
-            &lt;div data-type="on-hollidays" /&gt; 
-          </code>
+        <pre class="prettyprint">
+          &lt;div data-type="available" /&gt; 
+          &lt;div data-type="best-rate" /&gt; 
+          &lt;div data-type="on-hollidays" /&gt; 
         </pre>
 
         <h5>CommonJS standards</h5>
@@ -106,20 +97,56 @@
           standards for javascript applications, both server and client side.
         </p>
         <p>
-          We will be
-          using <a href="http://requirejs.org">requirejs</a> to load
+          We will be 
+          using <a href="/js/jquery.use.js">jQuery.use</a> that is a
+          thin wrapper around CommonJS dependency engine (in this
+          case we will be using the implementation
+          from <a href="http://requirejs.org">requirejs</a> ). <br />
+          Most of the time you will only need to invoke 
+            <code class="prettyprint lang-javascript">$.use()</code>
+          for loading 
           all the javascript, css and other resources we need.
+          And 
+            <code class="prettyprint lang-javascript">$.def()</code>
+          for defining your very own shiny modules.
         </p>
         <p>
-          The advantage of using requirejs is that resources are
+          The advantage of using CommonJS modules is that resources are
           loaded async, which means faster loading, more reusable
           javascript modules, and a clean, un-polluted javascript
           global scope.
         </p>
+        <p>
+        </p>
       </div>
 
       <div>
-        <h4>Javascript Layout and Directory Structure</h4>
+        <h4>Directory Structure</h4>
+        <pre>
+DOCUMENT_ROOT/
+             js/
+               jQuery.use.js
+               console.js
+
+               common/
+                  popup.js
+
+               ibe/
+                  login.js
+                  login/
+                    module.js
+
+             css/
+               ibe/
+                  login.css
+
+             images/
+               common/
+                  spinner.gif
+               ibe/
+                  login/
+                     login-bg.png
+        </pre>
         <p>
           All javascript files <em>must</em> be stored under
           the <code>js/</code> directory of the server's document
@@ -133,7 +160,7 @@
         <p>
           You are expected to create subdirectories to acommodate your
           needs by creating reusable javascript modules with
-          requirejs.
+          <code class="prettypring lang-javascript">$.def</code>
         </p>
 
         <p>
@@ -141,6 +168,12 @@
           IBE Login page.. the javascript for it must be available at: 
           <br />
           <code>js/ibe/login.js</code>
+          <br />
+          If you provide a reusable module (say login/logout
+          javascript functions for others to use)
+          create a CommonJS module at 
+          <br />
+          <code>js/ibe/login/module.js</code>
         </p>
       </div>
 
@@ -148,11 +181,12 @@
         <h4>Create a javascript modules per .js file you create</h4>
         <p>
           Following the convention from the previous point, you are
-          expected to make every .js file a <code>requirejs</code>
+          expected to make every .js file a <code>CommonJS</code>
           conformant module. <br />
 
-          The advantang of doing so, is that module dependencies will
-          be automatically resolved for us by requirejs, modules will
+          The advantage of doing so, is that module dependencies will
+          be automatically resolved for us by 
+          <code class="prettyprint lang-javascript">$.use</code>, modules will
           be only loaded once and only when needed. The client will
           get faster load times and less network usage.
         </p>
@@ -177,6 +211,13 @@
           the corresponding elements by using jQuery's event
           binding
         </p>
+        <p>
+          The only exception is the javascript needed to use a
+          module in your page:
+        </p>
+        <pre class="prettyprint">
+          &lt;script type="text/javascript"&gt;jQuery.use(['my/module'])&lt;/script&gt;
+        </pre>
       </div>
 
       <div>
@@ -202,40 +243,36 @@
 
         <h5>No free variables</h5>
         <p>
-          <em>Always</em> use the <code>var</code>
+          <em>Always</em> use the <code>var</code>,
           keyword to declare your variables. Not doing so would lead
           to scope naming conflicts. 
         </p>
 
-        <h5>Always use === operator for comparisions</h5>
+        <h5>Always use === and !== operators for equality test</h5>
         <p>
           The <code>===</code> operator behaves more like
           java's <code>equals</code>, the javascript <code>==</code>
           operator automatically coerces types, so for example, in
           javascript: 
-
-          <pre>
-            <code class="javascript">
-              12345 == '12345';   // is true
-              12345 === '12345';  // is false
-            </code>
-          </pre>
         </p>
+
+        <pre class="prettyprint">
+          12345 ==  '12345';  // is true
+          12345 === '12345';  // is false
+        </pre>
 
         <h5>Declare functions as variables</h5>
         <p>
           Declare javascript functions by assigning anonymous
           functions to variables using the <code>var</code> keyword.
-          <pre>
-            <code class="javascript">
-              // Not recommended.
-              function doSomething() { ... }
-
-              // Do this!
-              var doSomething = function() { ... }
-            </code>
-          </pre>
         </p>
+        <pre class="prettyprint">
+            // Not recommended.
+            function doSomething() { ... }
+            
+            // Do this!
+            var doSomething = function() { ... }
+        </pre>
 
         <h5>Always use Javascript semicolons</h5>
         <p>
@@ -245,40 +282,51 @@
           line feed. However you are expected to explicitly add
           semicolons so that javascript minimizers can remove line
           feeds safely.
-          
-          <pre>
-            <code class="javascript">
-              a = 1 + 2;  // Always do this.
-              a = 1 + 2   // Dont do this, wont work on some compressors
-            </code>
-          </pre>
         </p>
+        <pre class="prettyprint">
+            a = 1 + 2;  // Always do this.
+            a = 1 + 2   // Dont do this, wont work on some compressors
+        </pre>
 
         <h5>Dont polute global scope</h5>
         <p>
           You <em>must</em> place all global javascript code
           inside an anonymous immediatly-activated function.
-          <pre>
-            <code class="javascript">
-              (function() {
-                // your code here.
-                // fine, but not recommended as we prefer commonjs
-                // modules. see the following example...
-              })();
-            </code>
-
-            <code class="javascript">
-              // When using requirejs, you place all your code inside the
-              // function given to require.
-              // This example requires the IBE Login module from 
-              // the next section, to login when loaded.
-              require.def('my/module', ['ibe/login'], function(usrAuth){
-                // All your code here.
-                usrAuth.login('root', 'super-password')
-              });
-            </code>
-          </pre>
         </p>
+        <pre class="prettyprint">
+            new(function(undefined) {
+
+               // YOUR CODE HERE
+            
+            })();
+        </pre>
+
+        <p>
+          Even better you may want to create a CommonJS module. 
+          ( a complete module example is available at 
+          <a href="/js/console.js"><code>console.js</code></a> )
+
+        </p>
+        <pre class="prettyprint">
+            new(function(undefined){
+
+              /* 
+                This example uses the IBE Login module from 
+                the next section, to login when loaded.
+              */
+              $.use('ibe/login/module', function(loginModule){
+
+                // This is exectuted when the ibe/login module has been loaded
+                loginModule.login('root', 'super-password')
+
+                // this function returns the module object
+                // providing public members, in this case, nothing
+                return {};
+              });
+
+            })()
+
+        </pre>
 
         <h5>Use javascript logging</h5>
         <p>
@@ -291,7 +339,8 @@
           I recommend using chrome or firefox for javascript
           development. <br />
           
-          Also, we have a <code>console.js</code> module you must use
+          Also, we have
+          a <a href="/js/console.js"><code>console.js</code></a> module you must use
           for all your logging needs instead of accessing
           window.console yourself. <br/>
 
@@ -303,22 +352,24 @@
           want to
           install <a href="http://getfirebug.com/firebuglite">frebuglite</a>
           on it.
-
-          <pre>
-            <code class="javascript">
+        </p> 
+        <pre class="prettyprint">
               window.console.debug('Hi') // DONT EVER access the console directly
               console.debug('Hi')        // NOT
-            </code>
-            <a name="login-module-example"/>
-            <code class="javascript">
+        </pre>
+        <a name="login-module-example"></a>
+        <pre class="prettyprint">
+          new(function($, undefined){
+
               /* 
-                 Use the console.js module instead 
+                 Imagine a /js/ibe/login/module.js with the following
+                 content:
 
                  This example illustrates how to define a module in
                  <code>ibe/login.js</code>
                  with one dependency: the console.
               */
-              require.def('ibe/login', ['console'], function(console) {
+              $.def('ibe/login/module', 'console', function(console) {
                 console.debug('IBE LOGIN module loading');
                 console.debug('run when all dependencies are loaded');
 
@@ -335,7 +386,7 @@
                    // that exports an md5 function..
                    // and want to load it just when needed.
 
-                   require(['ibe/encode], function(encode) {
+                   $.use('ibe/encode', function(encode) {
                      encriptedPwd = encode.md5(pwd);
                    });
                 };
@@ -347,16 +398,19 @@
 
                 console.debug('returning module with public functions')
 
+                // The return value of this function will be used as the
+                // module object (the one containing public members)
+                // This can be any javascript object, a function, etc
                 return {
                    login: doLogin,
                    logout: doLogout
                 };
               });
-            </code>
-          </pre>
-        </p>
-      </div>
 
+          })(jQuery);
+        </pre>
+      </div>
+      
     </div>
 
     <div class="content">
@@ -365,7 +419,7 @@
       <div>
         <h4>jQuery</h4>
         <p>
-          We will be using jQuery, it's a really simple, jet powerful
+          We will be using jQuery, it's a really simple, yet powerful
           javascript framework for creating, modifing dom elements,
           and attaching, handling events. 
           
