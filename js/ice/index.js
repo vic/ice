@@ -28,13 +28,13 @@ new(function(undefined){
     $('.protocol-warning').show()
   }
 
-  $.use('console')
-
-  $.use('http://jqueryui.com/themeroller/themeswitchertool', function(){
+  $(document).ready(function(){
     $('.color-theme-select .theme-roller').themeswitcher({
       loadTheme: 'Redmond'
     })
   })
+
+  $.use('console')
 
   $.use('http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css',
         'http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js',
