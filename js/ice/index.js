@@ -49,23 +49,21 @@ new(function($, undefined){
     console.debug('This is the console object', console)
   })
 
-
-  // even non commonjs modules
-  $.use("http://jqueryui.com/themeroller/themeswitchertool/", function(){
-    // when the document has finally loaded 
-    // use theme-roller to configure the color theme
-    $(document).ready(function(){
-      $('.color-theme-select .theme-roller').themeswitcher({
-        loadTheme: 'Redmond'
-      })
-    })
-  })
-
-
   // you can load remote resources, like css, and js
   $.use('http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css',
         'http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js',
+        // when loaded call global function prettyPrint
         function() { prettyPrint(); })
+
+  // even non commonjs modules
+  $.use("http://jqueryui.com/themeroller/themeswitchertool/", function(){
+    // use theme-roller to configure the color theme
+    setTimeout(function(){
+      $('.color-theme-select .theme-roller').themeswitcher({
+        loadTheme: 'Redmond'
+      })
+    }, 1000)
+  })
 
   // this one is jQueryTools from flowplayer
   // it has several javascript controls we will be using.
