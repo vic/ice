@@ -28,19 +28,17 @@ new(function(undefined){
     $('.protocol-warning').show()
   }
 
-  var loaded = function(console) {
-    console.debug('Prettyprint inline code examples.')
-    prettyPrint()
+  $.use('console')
+
+  $.use('http://jqueryui.com/themeroller/themeswitchertool', function(){
     $('.color-theme-select .theme-roller').themeswitcher({
       loadTheme: 'Redmond'
     })
-  }
+  })
 
-  $.use('console',
-        'http://jqueryui.com/themeroller/themeswitchertool',
-        'http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css',
+  $.use('http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css',
         'http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js',
-        loaded)
+        function() { prettyPrint(); })
 
   $.use('http://cdn.jquerytools.org/1.2.4/jquery.tools.min.js')
 
