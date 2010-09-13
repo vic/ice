@@ -9,6 +9,11 @@
 
   var initialize = function() {
     themeroller()
+
+
+    $('fieldset legend').click(function(event) {
+      $(this).parent().find('div').slideToggle()
+    })
   }
 
   $(document).ready(initialize)

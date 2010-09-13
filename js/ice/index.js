@@ -55,14 +55,14 @@ new(function($, undefined){
         // when loaded call global function prettyPrint
         function() { prettyPrint(); })
 
-  // even non commonjs modules
-  $.use("http://jqueryui.com/themeroller/themeswitchertool/", function(){
-    // use theme-roller to configure the color theme
-    setTimeout(function(){
+  // Apply theme-roller when document is loaded
+  $.use('jquery.cookie', function(){
+    $.use('jquery.theme-switch-tool', function() {
+      // use theme-roller to configure the color theme
       $('.color-theme-select .theme-roller').themeswitcher({
         loadTheme: 'Redmond'
       })
-    }, 1000)
+    })
   })
 
   // this one is jQueryTools from flowplayer
